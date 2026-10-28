@@ -1,0 +1,24 @@
+{
+  "dataset": "iabhishekofficial/mobile-price-classification",
+  "title": "Mobile Price Classification",
+  "author": "iabhishekofficial",
+  "source_url": "https://www.kaggle.com/datasets/iabhishekofficial/mobile-price-classification",
+  "metadata_url": "https://www.kaggle.com/api/v1/datasets/view/iabhishekofficial/mobile-price-classification",
+  "version": 1,
+  "license_name_as_reported_by_source": "Unknown",
+  "metadata_checked_on": "2026-10-28",
+  "files": {
+    "train.csv": {
+      "path": "data/raw/train.csv",
+      "rows": 2000,
+      "columns": 21,
+      "sha256": "f9e8cd3154b8684a1be0ff401b1fba7750710af6bd076a399c6ce7ceb979c624"
+    },
+    "test.csv": {
+      "path": "data/raw/test.csv",
+      "rows": 1000,
+      "columns": 21,
+      "sha256": "e929f5999ffeedec84abf53cc8d35faa1bbd7e8ebd61826881aa62562d37adce"
+    }
+  }
+}

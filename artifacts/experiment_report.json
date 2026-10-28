@@ -1,0 +1,183 @@
+{
+  "versions": {
+    "Python": "3.13.2",
+    "NumPy": "2.2.4",
+    "pandas": "3.0.3",
+    "scikit-learn": "1.9.0",
+    "TensorFlow": "2.21.0"
+  },
+  "random_state": 42,
+  "dataset_sha256": "f9e8cd3154b8684a1be0ff401b1fba7750710af6bd076a399c6ce7ceb979c624",
+  "baseline": {
+    "GaussianNB": {
+      "Accuracy": 0.81,
+      "Precision": 0.8113261105197411,
+      "Recall": 0.8099999999999999,
+      "F1-macro": 0.8104578013732255,
+      "ROC-AUC": 0.9505583333333334
+    },
+    "DecisionTree": {
+      "Accuracy": 0.83,
+      "Precision": 0.8318831447022742,
+      "Recall": 0.83,
+      "F1-macro": 0.830168476083014,
+      "ROC-AUC": 0.8866666666666667
+    },
+    "LDA": {
+      "Accuracy": 0.955,
+      "Precision": 0.9556123440052012,
+      "Recall": 0.9550000000000001,
+      "F1-macro": 0.9551795668777637,
+      "ROC-AUC": 0.9958166666666667
+    },
+    "SVM": {
+      "Accuracy": 0.895,
+      "Precision": 0.89685959761263,
+      "Recall": 0.895,
+      "F1-macro": 0.8956306226521206,
+      "ROC-AUC": 0.9833000000000001
+    },
+    "kNN": {
+      "Accuracy": 0.5,
+      "Precision": 0.521130101168955,
+      "Recall": 0.5,
+      "F1-macro": 0.5053550007497376,
+      "ROC-AUC": 0.7697499999999999
+    }
+  },
+  "tuned": {
+    "GaussianNB": {
+      "Accuracy": 0.8225,
+      "Precision": 0.8208098336657245,
+      "Recall": 0.8224999999999999,
+      "F1-macro": 0.8214108126957733,
+      "ROC-AUC": 0.9524083333333333
+    },
+    "DecisionTree": {
+      "Accuracy": 0.875,
+      "Precision": 0.8738096344125982,
+      "Recall": 0.875,
+      "F1-macro": 0.874163034447214,
+      "ROC-AUC": 0.9669833333333334
+    },
+    "LDA": {
+      "Accuracy": 0.955,
+      "Precision": 0.9556123440052012,
+      "Recall": 0.9550000000000001,
+      "F1-macro": 0.9551795668777637,
+      "ROC-AUC": 0.9958166666666667
+    },
+    "SVM": {
+      "Accuracy": 0.975,
+      "Precision": 0.9750475047504751,
+      "Recall": 0.9750000000000001,
+      "F1-macro": 0.9749993749843746,
+      "ROC-AUC": 0.9993583333333333
+    },
+    "kNN": {
+      "Accuracy": 0.73,
+      "Precision": 0.7315259701223361,
+      "Recall": 0.73,
+      "F1-macro": 0.7305663992886595,
+      "ROC-AUC": 0.8916333333333333
+    }
+  },
+  "final": {
+    "SVM": {
+      "Accuracy": 0.975,
+      "Precision": 0.9750475047504751,
+      "Recall": 0.9750000000000001,
+      "F1-macro": 0.9749993749843746,
+      "ROC-AUC": 0.9993583333333333
+    },
+    "LDA": {
+      "Accuracy": 0.955,
+      "Precision": 0.9556123440052012,
+      "Recall": 0.9550000000000001,
+      "F1-macro": 0.9551795668777637,
+      "ROC-AUC": 0.9958166666666667
+    },
+    "TensorFlow MLP": {
+      "Accuracy": 0.93,
+      "Precision": 0.9305228758169933,
+      "Recall": 0.9299999999999999,
+      "F1-macro": 0.9292639896580752,
+      "ROC-AUC": 0.995775
+    },
+    "DecisionTree": {
+      "Accuracy": 0.875,
+      "Precision": 0.8738096344125982,
+      "Recall": 0.875,
+      "F1-macro": 0.874163034447214,
+      "ROC-AUC": 0.9669833333333334
+    },
+    "GaussianNB": {
+      "Accuracy": 0.8225,
+      "Precision": 0.8208098336657245,
+      "Recall": 0.8224999999999999,
+      "F1-macro": 0.8214108126957733,
+      "ROC-AUC": 0.9524083333333333
+    },
+    "kNN": {
+      "Accuracy": 0.73,
+      "Precision": 0.7315259701223361,
+      "Recall": 0.73,
+      "F1-macro": 0.7305663992886595,
+      "ROC-AUC": 0.8916333333333333
+    }
+  },
+  "best_nn": "exp_3_regularized",
+  "best_nn_epochs": 44,
+  "search_seconds": {
+    "GaussianNB": 2.979237799998373,
+    "DecisionTree": 23.22841039998457,
+    "LDA": 3.8998451000079513,
+    "SVM": 69.28352559998166,
+    "kNN": 91.56132900004741
+  },
+  "nn_seconds": {
+    "exp_1_shallow": 25.458614000002854,
+    "exp_2_deep": 36.0747516999254,
+    "exp_3_regularized": 28.07656209997367,
+    "exp_4_lr_high": 21.86495589988772,
+    "exp_4_lr_low": 22.413010700023733
+  },
+  "nn_refit_seconds": 7.641490900074132,
+  "best_params": {
+    "GaussianNB": {
+      "model__var_smoothing": 0.1
+    },
+    "DecisionTree": {
+      "model__criterion": "entropy",
+      "model__max_depth": 9,
+      "model__min_samples_split": 20
+    },
+    "LDA": {
+      "model__solver": "svd"
+    },
+    "SVM": {
+      "model__C": 10,
+      "model__gamma": "scale",
+      "model__kernel": "linear"
+    },
+    "kNN": {
+      "model__metric": "manhattan",
+      "model__n_neighbors": 39,
+      "model__weights": "distance"
+    }
+  },
+  "cv_f1": {
+    "GaussianNB": 0.8137753132976924,
+    "DecisionTree": 0.8485870908046989,
+    "LDA": 0.9354497756670279,
+    "SVM": 0.9649616516237381,
+    "kNN": 0.6808543728176512
+  },
+  "nn_logs": {
+    "exp_1_shallow": "logs\\fit\\exp_1_shallow\\20261028_192543_888508",
+    "exp_2_deep": "logs\\fit\\exp_2_deep\\20261028_192543_888508",
+    "exp_3_regularized": "logs\\fit\\exp_3_regularized\\20261028_192543_888508",
+    "exp_4_lr_high": "logs\\fit\\exp_4_lr_high\\20261028_192543_888508",
+    "exp_4_lr_low": "logs\\fit\\exp_4_lr_low\\20261028_192543_888508"
+  }
+}

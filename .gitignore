@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+logs/
+artifacts/*
+!artifacts/*.csv
+!artifacts/*.json
+!artifacts/*.png
+!artifacts/*.keras
+!artifacts/*.joblib
+!artifacts/tensorboard/
+*.failed.ipynb

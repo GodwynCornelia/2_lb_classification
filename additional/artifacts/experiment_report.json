@@ -1,0 +1,58 @@
+{
+  "versions": {
+    "Python": "3.13.2",
+    "NumPy": "2.2.4",
+    "pandas": "3.0.3",
+    "scikit-learn": "1.9.0",
+    "TensorFlow": "2.21.0",
+    "Keras": "3.15.1"
+  },
+  "random_state": 42,
+  "epochs": 60,
+  "batch_size": 64,
+  "dataset_sha256": "f9e8cd3154b8684a1be0ff401b1fba7750710af6bd076a399c6ce7ceb979c624",
+  "n_configs": 9,
+  "n_cv_fits": 45,
+  "n_total_neural_fits": 46,
+  "best_config": "regularized_lr_0.001",
+  "best_params": {
+    "architecture": "regularized",
+    "learning_rate": 0.001
+  },
+  "best_cv_accuracy": 0.9206249999999999,
+  "best_cv_std_accuracy": 0.013199195051214302,
+  "best_cv_loss": 0.18754917049027858,
+  "baseline_test": {
+    "accuracy": 0.965,
+    "loss": 0.18915077905579727,
+    "precision_macro": 0.9650445632798574,
+    "recall_macro": 0.965,
+    "f1_macro": 0.9649863177272501,
+    "roc_auc_ovr_macro": 0.9986666666666667
+  },
+  "neural_test": {
+    "accuracy": 0.9425,
+    "loss": 0.14715190514593204,
+    "precision_macro": 0.9432445961987502,
+    "recall_macro": 0.9424999999999999,
+    "f1_macro": 0.942109309944287,
+    "roc_auc_ovr_macro": 0.9962833333333333
+  },
+  "test_accuracy_delta_pp": -2.2499999999999964,
+  "cv_accuracy_delta_vs_shallow_pp": 3.2499999999999973,
+  "lr_marginal_range_pp": 22.37500000000001,
+  "architecture_marginal_range_pp": 15.416666666666657,
+  "baseline_training_seconds": 0.04782780003733933,
+  "refit_training_seconds": 21.19043459999375,
+  "total_search_seconds": 875.4711796999909,
+  "selection": "mean_accuracy desc, mean_loss asc, std_accuracy asc, stable order",
+  "fold_seeds": [
+    43,
+    44,
+    45,
+    46,
+    47
+  ],
+  "refit_seed": 42,
+  "reused_lab2_holdout": true
+}

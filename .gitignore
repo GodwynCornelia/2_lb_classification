@@ -10,3 +10,4 @@ artifacts/*
 !artifacts/*.joblib
 !artifacts/tensorboard/
 *.failed.ipynb
+additional/artifacts/progress.json

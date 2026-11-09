@@ -21,6 +21,7 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 from sklearn.preprocessing import label_binarize
 import tensorflow as tf
 from tensorboard.backend.event_processing.event_accumulator import EventAccumulator
+from notebook_quality import validate_notebook_text
 
 ROOT = Path(__file__).resolve().parent
 os.chdir(ROOT)
@@ -32,6 +33,7 @@ def main():
     args = parser.parse_args()
     nb = nbformat.read(ROOT / "Lab2_Classification_NeuralNetworks.ipynb", as_version=4)
     nbformat.validate(nb)
+    validate_notebook_text(nb)
     code_cells = 0
     images = 0
     for i, cell in enumerate(nb.cells):

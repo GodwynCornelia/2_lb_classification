@@ -12,6 +12,7 @@ import time
 import nbformat as nbf
 from nbclient import NotebookClient
 from jupyter_client import KernelManager
+from notebook_quality import apply_interpretations, write_notebook_utf8
 
 ROOT = Path(__file__).resolve().parent
 OUTPUT = ROOT / "Lab2_Additional_TensorFlow_CV.ipynb"
@@ -815,6 +816,9 @@ git switch ДОП
 .\\.venv\\Scripts\\python.exe generate_additional_notebook.py
 .\\.venv\\Scripts\\python.exe validate_additional_notebook.py
 .\\.venv\\Scripts\\python.exe view_tensorboard.py --additional
+
+# Обновить Markdown из сохранённых результатов без повторного обучения
+.\\.venv\\Scripts\\python.exe generate_additional_notebook.py --refresh-report
 ```
 
 Зависимости общие с основной работой: `requirements-lock.txt`. На Linux/macOS
@@ -838,10 +842,29 @@ git switch ДОП
     (ROOT / "additional" / "README.md").write_text(text, encoding="utf-8")
 
 
+def refresh_report():
+    """Rebuild measured Markdown safely, keeping all executed code and outputs."""
+    artifacts = ROOT / "additional" / "artifacts"
+    report = json.loads((artifacts / "experiment_report.json").read_text(encoding="utf-8"))
+    analyses = json.loads((artifacts / "analyses.json").read_text(encoding="utf-8"))
+    analyses = enrich_interpretations(analyses, report)
+    notebook = nbf.read(OUTPUT, as_version=4)
+    apply_interpretations(notebook, analyses)
+    write_notebook_utf8(notebook, OUTPUT)
+    (artifacts / "analyses.json").write_text(
+        json.dumps(analyses, ensure_ascii=False, indent=2)+"\n", encoding="utf-8")
+    write_readme(report)
+    print(f"Refreshed {len(analyses)} measured interpretations in {OUTPUT.name} (UTF-8).")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--timeout", type=int, default=7200, help="Maximum seconds per cell")
+    parser.add_argument("--refresh-report", action="store_true", help="Rebuild measured Markdown without training")
     args = parser.parse_args()
+    if args.refresh_report:
+        refresh_report()
+        return
     os.chdir(ROOT)
     # Preserve the previous event snapshot outside Git before a fresh execution.
     # Merging tfevents from two runs would duplicate epochs in TensorBoard and audits.
@@ -882,12 +905,10 @@ def main():
         raise RuntimeError("Measured analyses were not produced")
     report = json.loads((ROOT / "additional/artifacts/experiment_report.json").read_text(encoding="utf-8"))
     analyses = enrich_interpretations(analyses, report)
-    for cell in notebook.cells:
-        if key := cell.metadata.get("additional_analysis"):
-            cell.source = "### Интерпретация результатов\n\n"+analyses[key]
+    apply_interpretations(notebook, analyses)
     nbf.validate(notebook)
     assert all(c.execution_count is not None for c in notebook.cells if c.cell_type == "code")
-    nbf.write(notebook, OUTPUT)
+    write_notebook_utf8(notebook, OUTPUT)
     (ROOT / "additional/artifacts/analyses.json").write_text(
         json.dumps(analyses, ensure_ascii=False, indent=2)+"\n", encoding="utf-8")
     write_readme(report)

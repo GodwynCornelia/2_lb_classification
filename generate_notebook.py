@@ -15,6 +15,7 @@ import time
 
 import nbformat as nbf
 from nbclient import NotebookClient
+from notebook_quality import apply_interpretations, write_notebook_utf8
 
 ROOT = Path(__file__).resolve().parent
 OUTPUT = ROOT / "Lab2_Classification_NeuralNetworks.ipynb"
@@ -959,13 +960,11 @@ def main():
             cell.outputs = cleaned
     if not analyses:
         raise RuntimeError("Execution did not produce measured interpretations")
-    for cell in notebook.cells:
-        if key := cell.metadata.get("lab2_analysis"):
-            cell.source = "### Интерпретация результатов\n\n" + analyses[key]
+    apply_interpretations(notebook, analyses)
     nbf.validate(notebook)
     assert all(c.execution_count is not None for c in notebook.cells if c.cell_type == "code")
     assert not any(o.output_type == "error" for c in notebook.cells if c.cell_type == "code" for o in c.outputs)
-    nbf.write(notebook, OUTPUT)
+    write_notebook_utf8(notebook, OUTPUT)
     print(f"Saved {OUTPUT.name}: {len(notebook.cells)} cells, {time.perf_counter()-started:.1f}s", flush=True)
 
 

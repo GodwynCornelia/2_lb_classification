@@ -44,6 +44,9 @@ git switch ДОП
 .\.venv\Scripts\python.exe generate_additional_notebook.py
 .\.venv\Scripts\python.exe validate_additional_notebook.py
 .\.venv\Scripts\python.exe view_tensorboard.py --additional
+
+# Обновить Markdown из сохранённых результатов без повторного обучения
+.\.venv\Scripts\python.exe generate_additional_notebook.py --refresh-report
 ```
 
 Зависимости общие с основной работой: `requirements-lock.txt`. На Linux/macOS

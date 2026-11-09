@@ -23,6 +23,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, log_loss, precision_score, recall_score, f1_score, roc_auc_score
 import tensorflow as tf
 from tensorboard.backend.event_processing.event_accumulator import EventAccumulator
+from notebook_quality import validate_notebook_text
 
 ROOT = Path(__file__).resolve().parent
 ARTIFACTS = ROOT / "additional" / "artifacts"
@@ -54,6 +55,8 @@ def main():
     report = json.loads((ARTIFACTS / "experiment_report.json").read_text(encoding="utf-8"))
     notebook = nbformat.read(ROOT / "Lab2_Additional_TensorFlow_CV.ipynb", as_version=4)
     nbformat.validate(notebook)
+    analyses = json.loads((ARTIFACTS / "analyses.json").read_text(encoding="utf-8"))
+    validate_notebook_text(notebook, expected_analyses=analyses)
     code_count, png_count = 0, 0
     for i, cell in enumerate(notebook.cells):
         assert cell.source.strip(), i
